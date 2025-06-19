@@ -49,13 +49,13 @@ const HeroSection = () => {
         </div>
         <div className="col-span-5 place-self-center mt-4 lg:mt-0">
           <div className="rounded-full m-5 bg-[#181818] w-[300px] h-[300px] lg:w-[400px] lg:h-[400px] relative">
-            <Image
+            {/* <Image
               src="/assets/face.png"
               alt="My image"
               width={250}
               height={200}
               className="absolute transform -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2"
-            />
+            /> */}
           </div>
         </div>
       </div>
