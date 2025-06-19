@@ -6,7 +6,7 @@ const ProjectCard = ({ title, description, images, onClick }) => {
   return (
     <div onClick={onClick} className="cursor-pointer">
       <div
-        className="h-52 md:h-72 w-full rounded-t-xl relative group"
+        className="h-52 md:h-72 w-full rounded-t-xl relative group object-contain"
         style={{
           backgroundImage: `url(${mainImage})`,
           backgroundSize: "cover",

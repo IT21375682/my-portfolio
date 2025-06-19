@@ -3,15 +3,18 @@ import HeroSection from "./components/HeroSection";
 import Navbar from "./components/Navbar";
 import AboutSection from "./components/AboutSection"; 
 import ProjectsSection from "./components/ProjectsSection";
+import EmailSection from "./components/EmailSection";
 
 export default function Home() {
   return (
   <main className="flex min-h-screen flex-col bg-black mx-auto px-12 py-4">
    <Navbar/>
-   <div className="container mx-auto px-9 py-4 mt-24">
+   <div className="container mx-auto xl:px-9 px-4 py-4 mt-24">
    <HeroSection/>
    <AboutSection/>
    <ProjectsSection/>
+   <EmailSection/>
+
     </div>
   </main>
   );

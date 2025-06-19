@@ -11,6 +11,7 @@ const projectsData = [
     title: "AI based IEEE document formater",
     description: "Project 1 description",
     images: [
+        "/assets/projects/WriteWizard/bg1.PNG",
       "/assets/projects/WriteWizard/1.PNG",
       "/assets/projects/WriteWizard/2.jpg",
       "/assets/projects/WriteWizard/3.PNG",
@@ -24,6 +25,7 @@ const projectsData = [
     title: "Ecommerce and ERP Application",
     description: "Project 2 description",
      images: [
+      "/assets/projects/clipcart/bg1.PNG",
       "/assets/projects/clipcart/1.PNG",
       "/assets/projects/clipcart/2.PNG",
       "/assets/projects/clipcart/3.PNG",
@@ -43,6 +45,7 @@ const projectsData = [
     title: "GlobCarry - Parcel delivery Platfrom",
     description: "Project 3 description",
      images: [
+      "/assets/projects/globcarry/bg1.PNG",
       "/assets/projects/globcarry/1.PNG",
       "/assets/projects/globcarry/2.PNG",
       "/assets/projects/globcarry/3.PNG",
@@ -64,6 +67,7 @@ const projectsData = [
     title: "TourAround - TourGuide Application",
     description: "Project 4 description",
      images: [
+      "/assets/projects/TourAround/bg1.png",
       "/assets/projects/TourAround/1.jpeg",
       "/assets/projects/TourAround/2.jpeg",
       "/assets/projects/TourAround/3.jpeg",
@@ -83,6 +87,7 @@ const projectsData = [
     title: "TicketEase-The Smart QR Tour App for Bus",
     description: " The Smart QR Tour App for Bus Travelers",
      images: [
+      "/assets/projects/ticketease/bg1.png",
       "/assets/projects/ticketease/1.jpeg",
       "/assets/projects/ticketease/2.jpeg",
       "/assets/projects/ticketease/3.jpeg",
