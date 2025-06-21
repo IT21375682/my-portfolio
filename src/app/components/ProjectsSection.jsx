@@ -106,19 +106,20 @@ const projectsData = [
     previewUrl: null,
     techStack: ["kotlin","mysql"]
   },
-  // {
-  //   id: 6,
-  //   title: "E-commerce Mobile POS Application",
-  //   description: "An E-commerce mobile application that provides a seamless shopping experience,order management and Loyalty program.",
-  //    images: [
-  //     "/assets/projects/ticketease/bg1.png",
+  {
+    id: 6,
+    title: "E-commerce Mobile POS Application",
+    description: "An E-commerce mobile application that provides a seamless shopping experience,order management and Loyalty program.",
+     images: [
+      "/assets/projects/jewelleryApp/0.png",
+      "/assets/projects/jewelleryApp/1.png",
 
-
-  //   ],
-  //   tag: ["All", "Client"],
-  //   gitUrl: "/",
-  //   previewUrl: null,
-  // },
+    ],
+    tag: ["All", "Client"],
+    gitUrl: null,
+    previewUrl: "https://play.google.com/store/apps/details?id=com.itsignature.asha_app",
+    techStack: ["flutter","mysql","react","express/white"]
+  },
   // {
   //   id: 7,
   //   title: "Loyalty system",

@@ -42,9 +42,13 @@ const HeroSection = () => {
               Hire me
             </button>
             <button className="px-1 py-1 rounded-full bg-gradient-to-br from-blue-500 via-purple-500 to-pink-500 text-white hover:bg-slate-800">
-              <span className="block bg-black rounded-full hover:bg-slate-800 px-5 py-2">
-                Download CV
-              </span>
+              <a
+              href="/files/Shandeep Jayapalan Resume.pdf"
+              download
+              className="block bg-black rounded-full hover:bg-slate-800 px-5 py-2"
+            >
+              Download CV
+            </a>
             </button>
           </div>
         </div>
