@@ -11,7 +11,7 @@ const projectsData = [
     title: "AI based IEEE document formater",
     description: "An AI-powered web application that formats IEEE documents and Refine your writing with AI.",
     images: [
-        "/assets/projects/WriteWizard/bg2.PNG",
+        "/assets/projects/WriteWizard/bg2.png",
       "/assets/projects/WriteWizard/1.PNG",
       "/assets/projects/WriteWizard/2.jpg",
       "/assets/projects/WriteWizard/3.PNG",
@@ -26,7 +26,7 @@ const projectsData = [
     title: "Ecommerce and ERP Application",
     description: "An E-commerce and ERP application that provides a seamless shopping experience and efficient resource management.",
      images: [
-      "/assets/projects/clipcart/bg2.PNG",
+      "/assets/projects/clipcart/bg2.png",
       "/assets/projects/clipcart/1.PNG",
       "/assets/projects/clipcart/2.PNG",
       "/assets/projects/clipcart/3.PNG",
@@ -47,7 +47,7 @@ const projectsData = [
     title: "GlobCarry - Parcel delivery Platfrom",
     description: "GlobCarry is a mobile application designed to streamline the process of parcel delivery, making it easier for users to send and receive packages efficiently.",
      images: [
-      "/assets/projects/globcarry/bg2.PNG",
+      "/assets/projects/globcarry/bg2.png",
       "/assets/projects/globcarry/1.PNG",
       "/assets/projects/globcarry/2.PNG",
       "/assets/projects/globcarry/3.PNG",
