@@ -18,7 +18,8 @@ const projectsData = [
     ],
     tag: ["All", "Web"],
     gitUrl: "/",
-    previewUrl: "/",
+    previewUrl: null,
+    techStack: ["react", "tailwindcss", "javascript","express/white","mongodb","python"]
   },
   {
     id: 2,
@@ -38,7 +39,8 @@ const projectsData = [
     ],
     tag: ["All", "Web"],
     gitUrl: "/",
-    previewUrl: "/",
+    previewUrl: null,
+    techStack: ["react", "tailwindcss", "javascript","mongodb","dotnet/white"]
   },
   {
     id: 3,
@@ -60,7 +62,8 @@ const projectsData = [
     ],
     tag: ["All", "Mobile"],
     gitUrl: "/",
-    previewUrl: "/",
+    previewUrl: null,
+    techStack: ["kotlin","mysql"]
   },
   {
     id: 4,
@@ -80,7 +83,8 @@ const projectsData = [
     ],
     tag: ["All", "Mobile"],
     gitUrl: "/",
-    previewUrl: "/",
+    previewUrl: null,
+    techStack: ["kotlin","mysql"]
   },
   {
     id: 5,
@@ -97,23 +101,41 @@ const projectsData = [
       "/assets/projects/ticketease/7.jpeg"
 
     ],
-    tag: ["All", "Web"],
+    tag: ["All", "Mobile"],
     gitUrl: "/",
-    previewUrl: "/",
+    previewUrl: null,
+    techStack: ["kotlin","mysql"]
   },
   // {
   //   id: 6,
-  //   title: "Full-stack Roadmap",
-  //   description: "Project 6 description",
-  //   images: ["/images/projects/6.png"],
-  //   tag: ["All", "Web"],
-  //   gitUrl: "/",
-  //   previewUrl: "/",
-  // },
-];
+  //   title: "E-commerce Mobile POS Application",
+  //   description: "An E-commerce mobile application that provides a seamless shopping experience,order management and Loyalty program.",
+  //    images: [
+  //     "/assets/projects/ticketease/bg1.png",
 
+
+  //   ],
+  //   tag: ["All", "Client"],
+  //   gitUrl: "/",
+  //   previewUrl: null,
+  // },
+  // {
+  //   id: 7,
+  //   title: "Loyalty system",
+  //   description: "An E-commerce mobile application that provides a seamless shopping experience and Loyalty program.",
+  //    images: [
+  //     "/assets/projects/ticketease/bg1.png",
+
+
+  //   ],
+  //   tag: ["All", "Client"],
+  //   gitUrl: "/",
+  //   previewUrl: null,
+  // },
+
+];
 const ProjectsSection = () => {
-  const [tag, setTag] = useState("All");
+  const [tag, setTag] = useState('All');
   const [selectedProject, setSelectedProject] = useState(null);
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true });
@@ -122,43 +144,77 @@ const ProjectsSection = () => {
     project.tag.includes(tag)
   );
 
+  const containerVariants = {
+    hidden: {},
+    show: {
+      transition: {
+        staggerChildren: 0.15,
+        delayChildren: 0.2,
+      },
+    },
+  };
+
   const cardVariants = {
-    initial: { y: 50, opacity: 0 },
-    animate: { y: 0, opacity: 1 },
+    hidden: { opacity: 0, y: 30 },
+    show: { opacity: 1, y: 0, transition: { duration: 0.5, ease: 'easeOut' } },
   };
 
   return (
-    <section id="projects" className="py-16 px-4 sm:px-6 lg:px-12 text-white">
+    <motion.section
+      id="projects"
+      className="py-20 px-6 sm:px-10 lg:px-16  text-white"
+      initial={{ opacity: 0, y: 50 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      transition={{ duration: 0.8 }}
+    >
       <div className="max-w-screen-xl mx-auto">
-        <h2 className="text-center text-4xl font-bold mb-4">My Projects</h2>
+        <motion.h2
+          className="text-center text-4xl font-bold mb-6"
+          initial={{ opacity: 0, y: -20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.2, duration: 0.6 }}
+        >
+          My Projects
+        </motion.h2>
 
-        <div className="flex flex-wrap justify-center items-center gap-3 py-6">
-          {["All", "Web", "Mobile"].map((t) => (
+        <motion.div
+          className="flex flex-wrap justify-center items-center gap-3 py-4"
+          initial={{ opacity: 0, y: 10 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.3, duration: 0.5 }}
+        >
+          {['All', 'Web', 'Mobile','Client'].map((t) => (
             <ProjectTag key={t} onClick={setTag} name={t} isSelected={tag === t} />
           ))}
-        </div>
+        </motion.div>
 
-        <ul
+        <motion.ul
           ref={ref}
-          className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 md:gap-10 mt-6"
+          className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 mt-10"
+          variants={containerVariants}
+          initial="hidden"
+          animate={isInView ? 'show' : 'hidden'}
         >
-          {filteredProjects.map((project, index) => (
+          {filteredProjects.map((project) => (
             <motion.li
               key={project.id}
               variants={cardVariants}
-              initial="initial"
-              animate={isInView ? "animate" : "initial"}
-              transition={{ duration: 0.3, delay: index * 0.2 }}
+              whileHover={{ scale: 1.02 }}
             >
               <ProjectCard
-                title={project.title}
-                description={project.description}
-                images={project.images}
-                onClick={() => setSelectedProject(project)}
-              />
+              title={project.title}
+              description={project.description}
+              images={project.images}
+              previewUrl={project.previewUrl}
+              gitUrl={project.gitUrl}
+              techStack={project.techStack}
+              onClick={() => setSelectedProject(project)}
+            />
+
             </motion.li>
           ))}
-        </ul>
+        </motion.ul>
 
         {selectedProject && (
           <ProjectModal
@@ -167,7 +223,7 @@ const ProjectsSection = () => {
           />
         )}
       </div>
-    </section>
+    </motion.section>
   );
 };
 
