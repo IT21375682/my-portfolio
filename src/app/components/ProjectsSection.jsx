@@ -9,9 +9,9 @@ const projectsData = [
   {
     id: 1,
     title: "AI based IEEE document formater",
-    description: "Project 1 description",
+    description: "An AI-powered web application that formats IEEE documents and Refine your writing with AI.",
     images: [
-        "/assets/projects/WriteWizard/bg1.PNG",
+        "/assets/projects/WriteWizard/bg2.PNG",
       "/assets/projects/WriteWizard/1.PNG",
       "/assets/projects/WriteWizard/2.jpg",
       "/assets/projects/WriteWizard/3.PNG",
@@ -23,9 +23,9 @@ const projectsData = [
   {
     id: 2,
     title: "Ecommerce and ERP Application",
-    description: "Project 2 description",
+    description: "An E-commerce and ERP application that provides a seamless shopping experience and efficient resource management.",
      images: [
-      "/assets/projects/clipcart/bg1.PNG",
+      "/assets/projects/clipcart/bg2.PNG",
       "/assets/projects/clipcart/1.PNG",
       "/assets/projects/clipcart/2.PNG",
       "/assets/projects/clipcart/3.PNG",
@@ -43,9 +43,9 @@ const projectsData = [
   {
     id: 3,
     title: "GlobCarry - Parcel delivery Platfrom",
-    description: "Project 3 description",
+    description: "GlobCarry is a mobile application designed to streamline the process of parcel delivery, making it easier for users to send and receive packages efficiently.",
      images: [
-      "/assets/projects/globcarry/bg1.PNG",
+      "/assets/projects/globcarry/bg2.PNG",
       "/assets/projects/globcarry/1.PNG",
       "/assets/projects/globcarry/2.PNG",
       "/assets/projects/globcarry/3.PNG",
@@ -65,7 +65,7 @@ const projectsData = [
   {
     id: 4,
     title: "TourAround - TourGuide Application",
-    description: "Project 4 description",
+    description: "TourAround is a mobile application designed to enhance the travel experience by providing users with a comprehensive tour guide platform.",
      images: [
       "/assets/projects/TourAround/bg1.png",
       "/assets/projects/TourAround/1.jpeg",
@@ -85,7 +85,7 @@ const projectsData = [
   {
     id: 5,
     title: "TicketEase-The Smart QR Tour App for Bus",
-    description: " The Smart QR Tour App for Bus Travelers",
+    description: " TicketEase is a mobile application designed to simplify the process of booking and managing bus tickets with QR, providing users with a convenient and efficient travel experience.",
      images: [
       "/assets/projects/ticketease/bg1.png",
       "/assets/projects/ticketease/1.jpeg",
@@ -128,41 +128,45 @@ const ProjectsSection = () => {
   };
 
   return (
-    <section id="projects">
-      <h2 className="text-center text-4xl font-bold text-white mt-4 mb-8 md:mb-12">
-        My Projects
-      </h2>
-      <div className="text-white flex flex-row justify-center items-center gap-2 py-6">
-        {["All", "Web", "Mobile"].map((t) => (
-          <ProjectTag key={t} onClick={setTag} name={t} isSelected={tag === t} />
-        ))}
+    <section id="projects" className="py-16 px-4 sm:px-6 lg:px-12 text-white">
+      <div className="max-w-screen-xl mx-auto">
+        <h2 className="text-center text-4xl font-bold mb-4">My Projects</h2>
+
+        <div className="flex flex-wrap justify-center items-center gap-3 py-6">
+          {["All", "Web", "Mobile"].map((t) => (
+            <ProjectTag key={t} onClick={setTag} name={t} isSelected={tag === t} />
+          ))}
+        </div>
+
+        <ul
+          ref={ref}
+          className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 md:gap-10 mt-6"
+        >
+          {filteredProjects.map((project, index) => (
+            <motion.li
+              key={project.id}
+              variants={cardVariants}
+              initial="initial"
+              animate={isInView ? "animate" : "initial"}
+              transition={{ duration: 0.3, delay: index * 0.2 }}
+            >
+              <ProjectCard
+                title={project.title}
+                description={project.description}
+                images={project.images}
+                onClick={() => setSelectedProject(project)}
+              />
+            </motion.li>
+          ))}
+        </ul>
+
+        {selectedProject && (
+          <ProjectModal
+            images={selectedProject.images}
+            onClose={() => setSelectedProject(null)}
+          />
+        )}
       </div>
-
-      <ul ref={ref} className="grid md:grid-cols-3 gap-8 md:gap-12">
-        {filteredProjects.map((project, index) => (
-          <motion.li
-            key={project.id}
-            variants={cardVariants}
-            initial="initial"
-            animate={isInView ? "animate" : "initial"}
-            transition={{ duration: 0.3, delay: index * 0.4 }}
-          >
-            <ProjectCard
-              title={project.title}
-              description={project.description}
-              images={project.images}
-              onClick={() => setSelectedProject(project)}
-            />
-          </motion.li>
-        ))}
-      </ul>
-
-      {selectedProject && (
-        <ProjectModal
-          images={selectedProject.images}
-          onClose={() => setSelectedProject(null)}
-        />
-      )}
     </section>
   );
 };

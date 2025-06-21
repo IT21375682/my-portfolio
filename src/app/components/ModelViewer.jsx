@@ -15,7 +15,7 @@ const ModelViewer = () => {
       auto-rotate
       autoplay
       camera-controls
-      style={{ width: '100%', height: '400px' }}
+      style={{ width: '100%', height: '500px' }}
     />
   );
 };
