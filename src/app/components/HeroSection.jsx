@@ -8,7 +8,7 @@ const ModelViewer = dynamic(() => import("./ModelViewer"), { ssr: false });
 
 const HeroSection = () => {
   return (
-    <section className="min-h-screen flex items-center overflow-hidden">
+    <section className="md:min-h-screen flex items-center overflow-hidden">
       <div className="flex flex-col-reverse lg:flex-row w-full items-center justify-between px-6 py-12 gap-4 lg:gap-8">
 
         {/* 🧩 Text Section */}

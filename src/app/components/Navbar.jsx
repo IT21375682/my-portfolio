@@ -16,7 +16,7 @@ const Navbar = () => {
   return (
     <>
       {/* Top Navbar */}
-      <nav className="fixed top-0 left-0 w-full z-50 bg-black bg-opacity-40 backdrop-blur-md shadow-md">
+      <nav className="fixed top-0 left-0 w-full z-50 bg-opacity-40 backdrop-blur-md shadow-md">
         <div className="max-w-screen-xl mx-auto flex items-center justify-between px-6 py-4">
           {/* Logo */}
           <Link href="/" className="text-white text-lg font-bold">

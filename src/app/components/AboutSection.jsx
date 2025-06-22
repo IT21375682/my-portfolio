@@ -1,10 +1,10 @@
-'use client';
-import React, { useTransition, useState } from 'react';
+"use client";
+import React, { useTransition, useState, useRef } from 'react';
 import TabButton from './TabButton';
 import { Disclosure } from '@headlessui/react';
 import dynamic from 'next/dynamic';
 import Image from 'next/image';
-import { motion } from 'framer-motion';
+import { motion, useInView } from 'framer-motion';
 
 const ModelViewer = dynamic(() => import('./ModelViewer'), { ssr: false });
 
@@ -63,6 +63,8 @@ const TAB_DATA = [
 const AboutSection = () => {
   const [tab, setTab] = useState('education');
   const [isPending, startTransition] = useTransition();
+  const ref = useRef(null);
+  const isInView = useInView(ref, { once: true });
 
   const handleTabChange = (id) => {
     startTransition(() => setTab(id));
@@ -76,11 +78,12 @@ const AboutSection = () => {
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
       transition={{ duration: 0.8, ease: 'easeOut' }}
+      ref={ref}
     >
-      <div className="flex flex-col xl:flex-row gap-10 xl:gap-16 items-center">
-        {/* Model or image */}
+      <div className="flex flex-col-reverse lg:flex-row items-center gap-6 xl:gap-16">
+        {/* Image on left for desktop */}
         <motion.div
-          className="w-full xl:w-1/2 flex justify-center"
+          className="w-full lg:w-1/2 flex justify-center"
           initial={{ opacity: 0, scale: 0.95 }}
           whileInView={{ opacity: 1, scale: 1 }}
           transition={{ delay: 0.2, duration: 0.5 }}
@@ -89,13 +92,13 @@ const AboutSection = () => {
             src="/assets/me.png"
             alt="My image"
             width={300}
-            height={450}
-            className="rounded-2xl object-cover shadow-xl"
+            height={350}
+            className="rounded-2xl object-cover shadow-xl mr-10"
           />
         </motion.div>
 
-        {/* Text section */}
-        <div className="w-full xl:w-1/2 text-left">
+        {/* Text on right */}
+        <div className="w-full lg:w-1/2 text-left">
           <motion.h2
             className="text-4xl font-bold mb-4"
             initial={{ opacity: 0, x: -30 }}
