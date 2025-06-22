@@ -17,7 +17,7 @@ const projectsData = [
       "/assets/projects/WriteWizard/3.PNG",
     ],
     tag: ["All", "Web"],
-    gitUrl: "/",
+    gitUrl: "https://github.com/IT21375682/WriteWizard.git",
     previewUrl: null,
     techStack: ["react", "tailwindcss", "javascript","express/white","mongodb","python"]
   },
@@ -38,7 +38,7 @@ const projectsData = [
 
     ],
     tag: ["All", "Web"],
-    gitUrl: "/",
+    gitUrl: "https://github.com/IT21375682/E-commerce_ERP.git",
     previewUrl: null,
     techStack: ["react", "tailwindcss", "javascript","mongodb","dotnet/white"]
   },
@@ -61,7 +61,7 @@ const projectsData = [
 
     ],
     tag: ["All", "Mobile"],
-    gitUrl: "/",
+    gitUrl: "https://github.com/IT21375682/GlobeCarry.git",
     previewUrl: null,
     techStack: ["kotlin","mysql"]
   },
@@ -82,7 +82,7 @@ const projectsData = [
 
     ],
     tag: ["All", "Mobile"],
-    gitUrl: "/",
+    gitUrl: "https://github.com/IT21375682/TourARound-Mobile-App.git",
     previewUrl: null,
     techStack: ["kotlin","mysql"]
   },
@@ -102,7 +102,7 @@ const projectsData = [
 
     ],
     tag: ["All", "Mobile"],
-    gitUrl: "/",
+    gitUrl: "https://github.com/IT21375682/TicketEase.git",
     previewUrl: null,
     techStack: ["kotlin","mysql"]
   },
@@ -120,19 +120,19 @@ const projectsData = [
     previewUrl: "https://play.google.com/store/apps/details?id=com.itsignature.asha_app",
     techStack: ["flutter","mysql","react","express/white"]
   },
-  // {
-  //   id: 7,
-  //   title: "Loyalty system",
-  //   description: "An E-commerce mobile application that provides a seamless shopping experience and Loyalty program.",
-  //    images: [
-  //     "/assets/projects/ticketease/bg1.png",
+{
+  id: 8,
+  title: "LLaMA 2-7B Text Formatter",
+  description: "Fine-tuned Meta’s LLaMA 2-7B model to transform casual, informal text into rigorously IEEE-formatted prose, complete with proper citations and section headings. Achieved a BLEU score of X.X and reduced formatting errors by Y %.",
+  images: [
+    "/assets/projects/llama2-7b/formatter-demo-1.png",
+    "/assets/projects/llama2-7b/formatter-demo-2.png"
+  ],
+  tag: ["All", "ML"],
+  gitUrl: "https://huggingface.co/Shandeep201/llama-2",
+  previewUrl:null
+}
 
-
-  //   ],
-  //   tag: ["All", "Client"],
-  //   gitUrl: "/",
-  //   previewUrl: null,
-  // },
 
 ];
 const ProjectsSection = () => {
@@ -185,7 +185,7 @@ const ProjectsSection = () => {
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.3, duration: 0.5 }}
         >
-          {['All', 'Web', 'Mobile','Client'].map((t) => (
+          {['All', 'Web', 'Mobile','ML','Client'].map((t) => (
             <ProjectTag key={t} onClick={setTag} name={t} isSelected={tag === t} />
           ))}
         </motion.div>

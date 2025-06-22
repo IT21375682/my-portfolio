@@ -1,59 +1,107 @@
-"use client"
-import React, {useState} from 'react'
-import Link from 'next/link'
-import NavLink from './NavLink'
-import {Bars3Icon,XMarkIcon} from '@heroicons/react/24/solid'
-import MenuOverlay from './MenuOverlay'
+"use client";
+import React, { useState } from "react";
+import Link from "next/link";
+import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/solid";
+import { FaGithub, FaLinkedin } from "react-icons/fa";
 
 
-const NavLinks=[
-    
-    {title:"About",path:"#about"},
-
-    {title:"Project",path:"#projects"},
-
-    {title:"Contact",path:"#contact"},
-]   
-
+const NavLinks = [
+  { title: "About", path: "#about" },
+  { title: "Projects", path: "#projects" },
+  { title: "Contact", path: "#contact" },
+];
 
 const Navbar = () => {
-    const [navbarOpen,setNavbarOpen]= useState(false);
+  const [open, setOpen] = useState(false);
+
   return (
-    <nav className='fixed top-0 right-0 left-0 z-10 bg-black bg-opacity-100'>
-        <div className='flex flex-wrap items-center justify-between mx-auto px-4'>
-        <Link href={"/"} className='text-2xl py-2 pl-3 pr-4 md:text-5xl text-white font-semibold'>
-    
-        </Link>
-        <div className='mobile-menue md:hidden block'>
-            {!navbarOpen? (
-                <button className='flex items-center px-3 text-sm text-slate-200 hover:text-white hover:border-white rounded-lg hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200'>
-                    <Bars3Icon onClick={()=>setNavbarOpen(true)} className="h-5 w-5" />
-                </button>
-            ) : (
-               <button className='flex items-center px-3 text-sm text-slate-200 hover:text-white hover:border-white rounded-lg hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200'>
-                    <XMarkIcon onClick={()=>setNavbarOpen(false)} className="h-5 w-5" />
-                </button>
-            )  }
-        </div>
-        <div className='menue hidden md:block md:w-auto pt-5 pr-5' id="navbar">     
-            <ul className='flex p-4 space-x-3 md:p-0 md:flex-row md:space-x-8'>
-                {NavLinks.map((link,index)=>(
-                    <li key={index}>
-                        <NavLink href={link.path} title={link.title} />
-                    </li>
-                ))}
-              
+    <>
+      <nav className="fixed top-0 left-0 w-full z-50 bg-opacity-40 shadow-md backdrop-blur-md">
+        <div className="max-w-screen-xl mx-auto flex items-center justify-between px-6 py-4">
+          {/* Logo */}
+          <Link href="/" className="text-white text-2xl font-bold">
+            Shandeep.dev
+          </Link>
+ 
+          {/* Desktop */}
+          <ul className="hidden md:flex space-x-8">
+            {NavLinks.map((link) => (
+              <li key={link.path}>
+                <a
+                  href={link.path}
+                  className="text-gray-300 hover:text-white font-medium transition"
+                >
+                  {link.title}
+                </a>
+              </li>
+            ))}
+          </ul>
 
-            </ul>
+          {/* Mobile Toggle */}
+          <button
+            className="md:hidden text-gray-300 hover:text-white focus:outline-none"
+            onClick={() => setOpen((v) => !v)}
+          >
+            {open ? <XMarkIcon className="w-6 h-6" /> : <Bars3Icon className="w-6 h-6" />}
+          </button>
         </div>
-        
-        </div>
-        {navbarOpen?(
-            <MenuOverlay links={NavLinks} />
-        ):null}
-        
-        </nav>
-  )
-}
+      </nav>
 
-export default Navbar
+      {/* Overlay */}
+      {open && (
+        <div
+          className="fixed inset-0 bg-black bg-opacity-50 z-40 md:hidden"
+          onClick={() => setOpen(false)}
+        />
+      )}
+
+      {/* Sidebar */}
+<div
+  className={`
+    fixed top-0 left-0 z-50 h-full bg-[#111] w-3/4 max-w-xs
+    transform ${open ? "translate-x-0" : "-translate-x-full"}
+    transition-transform duration-300 ease-in-out
+    md:hidden flex flex-col justify-between pt-20
+  `}
+>
+  <div>
+    {NavLinks.map((link) => (
+      <a
+        key={link.path}
+        href={link.path}
+        onClick={() => setOpen(false)}
+        className="block px-6 py-4 text-white text-2xl font-extrabold uppercase hover:bg-gray-800 transition"
+      >
+        {link.title}
+      </a>
+    ))}
+  </div>
+
+  {/* Social Links at bottom */}
+  <div className="px-6 py-8 space-y-4 border-t border-gray-800">
+    <p className="text-gray-400 uppercase text-sm tracking-wide">Connect</p>
+    <div className="flex space-x-6">
+      <a
+        href="https://github.com/IT21375682"
+        target="_blank"
+        rel="noopener noreferrer"
+        className="text-gray-400 hover:text-white transition"
+      >
+        <FaGithub className="w-6 h-6" />
+      </a>
+      <a
+        href="https://linkedin.com/in/shandeep-jayapalan-8ba948243"
+        target="_blank"
+        rel="noopener noreferrer"
+        className="text-gray-400 hover:text-white transition"
+      >
+        <FaLinkedin className="w-6 h-6" />
+      </a>
+    </div>
+  </div>
+</div>
+    </>
+  );
+};
+
+export default Navbar;

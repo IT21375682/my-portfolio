@@ -14,6 +14,7 @@ const ModelViewer = () => {
   auto-rotate
   autoplay
   camera-controls
+   disable-zoom
   style={{
     width: '100%',
     height: '100%',
