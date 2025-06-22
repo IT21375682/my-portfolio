@@ -123,13 +123,13 @@ const projectsData = [
 {
   id: 8,
   title: "LLaMA 2-7B Text Formatter",
-  description: "Fine-tuned Meta’s LLaMA 2-7B model to transform casual, informal text into rigorously IEEE-formatted prose, complete with proper citations and section headings. Achieved a BLEU score of X.X and reduced formatting errors by Y %.",
+  description: "Fine-tuned Meta’s LLaMA 2-7B model to transform casual, informal text into rigorously IEEE-formatted prose, complete with proper citations and references.",
   images: [
-    "/assets/projects/llama2-7b/formatter-demo-1.png",
-    "/assets/projects/llama2-7b/formatter-demo-2.png"
+    "/assets/projects/llama/0.png",
+ 
   ],
   tag: ["All", "ML"],
-  gitUrl: "https://huggingface.co/Shandeep201/llama-2",
+  gitUrl: "https://github.com/IT21375682/acadamic-text-converter-llama.git",
   previewUrl:null
 }
 
