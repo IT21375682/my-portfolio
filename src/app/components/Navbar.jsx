@@ -1,123 +1,150 @@
+// components/NeonNavbar.tsx
 "use client";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/solid";
-import { FaGithub, FaLinkedin } from "react-icons/fa";
 
-const NavLinks = [
-  { title: "About", path: "#about" },
-  { title: "Projects", path: "#projects" },
-  { title: "Contact", path: "#contact" },
+const LINKS = [
+  { name: "About", href: "#about" },
+  { name: "Projects", href: "#projects" },
+  { name: "Contact", href: "#contact" },
 ];
 
-const Navbar = () => {
+export default function NeonNavbar() {
   const [open, setOpen] = useState(false);
+  const [show, setShow] = useState(true);
+  const [lastY, setLastY] = useState(0);
+
+  useEffect(() => {
+    const onScroll = () => {
+      const y = window.scrollY;
+      setShow(y < lastY || y < 50);
+      setLastY(y);
+    };
+    window.addEventListener("scroll", onScroll);
+    return () => window.removeEventListener("scroll", onScroll);
+  }, [lastY]);
 
   return (
     <>
-      {/* Top Navbar */}
-      <nav className="fixed top-0 left-0 w-full z-50 bg-opacity-40 backdrop-blur-md shadow-md">
+      <nav
+        className={`
+          fixed top-0 left-0 right-0 z-50 bg-black/50 backdrop-blur-md
+          transform transition-transform duration-300
+          ${show ? "translate-y-0" : "-translate-y-full"}
+        `}
+      >
         <div className="max-w-screen-xl mx-auto flex items-center justify-between px-6 py-4">
-          {/* Logo */}
-          <Link href="/" className="text-white text-lg font-bold">
+          <Link href="/" className="neon-logo">
             shandeep.dev
           </Link>
 
-          {/* Desktop Links */}
-          <ul className="hidden md:flex space-x-8">
-            {NavLinks.map((link) => (
-              <li key={link.path}>
-                <a
-                  href={link.path}
-                  className="text-gray-300 hover:text-white text-sm font-medium transition"
-                >
-                  {link.title}
+          <ul className="hidden md:flex space-x-12">
+            {LINKS.map((l) => (
+              <li key={l.href} className="relative neon-item group">
+                <a href={l.href} className="text-gray-300 uppercase font-semibold">
+                  {l.name}
                 </a>
+                <span className="neon-underline" />
               </li>
             ))}
           </ul>
 
-          {/* Mobile Toggle */}
           <button
-            className="md:hidden text-gray-300 hover:text-white focus:outline-none"
-            onClick={() => setOpen((v) => !v)}
+            className="md:hidden text-cyan-400 hover:text-white"
+            onClick={() => setOpen(!open)}
           >
-            {open ? (
-            //   <XMarkIcon className="w-6 h-6" />
-        null
-            ) : (
-               <Bars3Icon className="w-6 h-6" />
-           
-            )}
+            {open ? <XMarkIcon className="w-6 h-6 neon-icon" /> : <Bars3Icon className="w-6 h-6 neon-icon" />}
           </button>
         </div>
       </nav>
 
-      {/* Overlay */}
-      {open && (
-        <div
-          className="fixed inset-0 bg-black bg-opacity-50 z-40 md:hidden"
-          onClick={() => setOpen(false)}
-        />
-      )}
-
-      {/* Sidebar */}
+      {/* Mobile Menu */}
       <div
         className={`
-          fixed top-0 left-0 z-50 h-screen w-full
-          bg-gradient-to-b from-transparent via-black/70 to-white/10
-          backdrop-blur-lg bg-opacity-10
-          transform ${open ? 'translate-x-0' : '-translate-x-full'}
-          transition-transform duration-300 ease-in-out
-          flex flex-col justify-between pt-8 pb-6 px-6 md:hidden
+          fixed inset-0 z-40 bg-black/70 backdrop-blur-sm
+          transition-opacity duration-300 ${open ? "opacity-100" : "opacity-0 pointer-events-none"}
+        `}
+        onClick={() => setOpen(false)}
+      />
+      <div
+        className={`
+          fixed top-0 left-0 z-50 h-full w-3/4 max-w-xs bg-black/90 backdrop-blur-lg
+          transform transition-transform duration-300
+          ${open ? "translate-x-0" : "-translate-x-full"}
         `}
       >
-        {/* Logo + Close */}
-        <div className="flex items-center justify-between mb-8">
-          <Link href="/" onClick={() => setOpen(false)} className="text-white text-lg font-bold">
+        <div className="px-6 pt-8 pb-4 border-b border-cyan-600/30">
+          <Link href="/" onClick={() => setOpen(false)} className="neon-logo text-xl">
             shandeep.dev
           </Link>
-          <button onClick={() => setOpen(false)} className="text-gray-300 hover:text-white">
-            <XMarkIcon className="w-6 h-6" />
-          </button>
         </div>
-
-        {/* Nav Links */}
-        <nav className="flex-grow">
-          {NavLinks.map((link) => (
+        <nav className="flex flex-col px-6 py-8 space-y-6">
+          {LINKS.map((l) => (
             <a
-              key={link.path}
-              href={link.path}
+              key={l.href}
+              href={l.href}
               onClick={() => setOpen(false)}
-              className="block mb-4 text-white text-base font-medium uppercase font-bold hover:text-gray-300 transition"
+              className="text-white text-2xl font-bold neon-item group"
             >
-              {link.title}
+              {l.name}
+              <span className="neon-underline" />
             </a>
           ))}
         </nav>
-
-        {/* Socials */}
-        <div className="mt-6 pt-6 border-t border-gray-800 flex items-center space-x-4">
-          <a
-            href="https://github.com/IT21375682"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-gray-300 hover:text-white transition"
-          >
-            <FaGithub className="w-5 h-5" />
-          </a>
-          <a
-            href="https://linkedin.com/in/shandeep-jayapalan-8ba948243"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-gray-300 hover:text-white transition"
-          >
-            <FaLinkedin className="w-5 h-5" />
-          </a>
-        </div>
       </div>
+
+      {/* Styles */}
+      <style jsx>{`
+        .neon-logo {
+          position: relative;
+          color: #0ff;
+          font-size: 1.5rem;
+          font-weight: bold;
+          text-decoration: none;
+          text-shadow:
+            0 0 4px #0ff,
+            0 0 8px #0ff;
+          transition: text-shadow 0.3s;
+        }
+        .neon-logo:hover {
+          text-shadow:
+            0 0 6px #0ff,
+            0 0 12px #0ff,
+            0 0 18px #0ff;
+        }
+        .neon-icon {
+          color: #0ff;
+          filter:
+            drop-shadow(0 0 4px #0ff)
+            drop-shadow(0 0 8px #0ff);
+          transition: filter 0.3s;
+        }
+        .neon-icon:hover {
+          filter:
+            drop-shadow(0 0 6px #0ff)
+            drop-shadow(0 0 12px #0ff)
+            drop-shadow(0 0 18px #0ff);
+        }
+        .neon-item {
+          position: relative;
+          display: inline-block;
+        }
+        .neon-underline {
+          position: absolute;
+          bottom: -4px;
+          left: 0;
+          width: 100%;
+          height: 2px;
+          background: linear-gradient(90deg, #0ff, #0ff 50%, transparent 50%);
+          background-size: 200% 100%;
+          background-position: 100% 0;
+          transition: background-position 0.5s;
+        }
+        .group:hover .neon-underline {
+          background-position: 0 0;
+        }
+      `}</style>
     </>
   );
-};
-
-export default Navbar;
+}

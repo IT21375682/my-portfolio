@@ -1,12 +1,12 @@
 "use client";
-import React, { useTransition, useState, useRef } from 'react';
-import TabButton from './TabButton';
-import { Disclosure } from '@headlessui/react';
-import dynamic from 'next/dynamic';
-import Image from 'next/image';
-import { motion, useInView } from 'framer-motion';
+import React, { useTransition, useState, useRef } from "react";
+import TabButton from "./TabButton";
+import { Disclosure } from "@headlessui/react";
+import dynamic from "next/dynamic";
+import Image from "next/image";
+import { motion, useInView } from "framer-motion";
 
-const ModelViewer = dynamic(() => import('./ModelViewer'), { ssr: false });
+const ModelViewer = dynamic(() => import("./ModelViewer"), { ssr: false });
 
 const Accordion = ({ title, items }) => (
   <Disclosure>
@@ -29,31 +29,55 @@ const Accordion = ({ title, items }) => (
 
 const TAB_DATA = [
   {
-    title: 'Education',
-    id: 'education',
+    title: "Education",
+    id: "education",
     content: (
       <ul className="list-disc pl-6 space-y-2 text-gray-300 text-sm">
-        <li>BSc (Hons) in IT Specialized in Software Engineering, SLIIT – 2021–2025</li>
+        <li>
+          BSc (Hons) in IT Specialized in Software Engineering, SLIIT – 2021–2025
+        </li>
         <li>HND in Information Technology, SLIIT – 2021–2023</li>
       </ul>
     ),
   },
   {
-    title: 'Skills',
-    id: 'skills',
+    title: "Skills",
+    id: "skills",
     content: (
       <div className="space-y-4">
         <Accordion
           title="Programming Languages"
-          items={['JavaScript (ES6+)', 'TypeScript', 'Python', 'Java', 'PHP (OOP)', 'Kotlin', 'C++']}
+          items={[
+            "JavaScript (ES6+)",
+            "TypeScript",
+            "Python",
+            "Java",
+            "PHP (OOP)",
+            "Kotlin",
+            "C++",
+          ]}
         />
         <Accordion
           title="Frameworks & Libraries"
-          items={['React.js / Redux', 'Node.js / Express', 'Spring Boot', 'ASP.NET', 'Android Studio (Kotlin)', 'OpenCV', 'Bootstrap / Tailwind CSS']}
+          items={[
+            "React.js / Redux",
+            "Node.js / Express",
+            "Spring Boot",
+            "ASP.NET",
+            "Android Studio (Kotlin)",
+            "OpenCV",
+            "Bootstrap / Tailwind CSS",
+          ]}
         />
         <Accordion
           title="Databases & Cloud"
-          items={['PostgreSQL / MySQL / MongoDB', 'Sequelize / Mongoose', 'Microsoft Azure', 'CI/CD & Kubernetes', 'Linux VPS Deployment']}
+          items={[
+            "PostgreSQL / MySQL / MongoDB",
+            "Sequelize / Mongoose",
+            "Microsoft Azure",
+            "CI/CD & Kubernetes",
+            "Linux VPS Deployment",
+          ]}
         />
       </div>
     ),
@@ -61,7 +85,7 @@ const TAB_DATA = [
 ];
 
 const AboutSection = () => {
-  const [tab, setTab] = useState('education');
+  const [tab, setTab] = useState("education");
   const [isPending, startTransition] = useTransition();
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true });
@@ -77,11 +101,11 @@ const AboutSection = () => {
       initial={{ opacity: 0, y: 50 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
-      transition={{ duration: 0.8, ease: 'easeOut' }}
+      transition={{ duration: 0.8, ease: "easeOut" }}
       ref={ref}
     >
-      <div className="flex flex-col-reverse lg:flex-row items-center gap-6 xl:gap-16">
-        {/* Image on left for desktop */}
+      <div className="flex flex-col lg:flex-row items-center gap-6 xl:gap-16">
+        {/* 1️⃣ Image first on mobile, left on desktop */}
         <motion.div
           className="w-full lg:w-1/2 flex justify-center"
           initial={{ opacity: 0, scale: 0.95 }}
@@ -93,11 +117,11 @@ const AboutSection = () => {
             alt="My image"
             width={300}
             height={350}
-            className="rounded-2xl object-cover shadow-xl mr-10"
+            className="rounded-2xl object-cover shadow-xl"
           />
         </motion.div>
 
-        {/* Text on right */}
+        {/* 2️⃣ Text second on mobile, right on desktop */}
         <div className="w-full lg:w-1/2 text-left">
           <motion.h2
             className="text-4xl font-bold mb-4"
@@ -114,9 +138,10 @@ const AboutSection = () => {
             whileInView={{ opacity: 1, x: 0 }}
             transition={{ delay: 0.4, duration: 0.6 }}
           >
-            I'm Shandeep Jayapalan, a full-stack developer specializing in modern web and mobile applications,
-            cloud deployment, and AI-powered tools. With hands-on experience across JavaScript, React, Node.js,
-            Spring Boot, Azure, and more, I build scalable, secure systems end-to-end.
+            I'm Shandeep Jayapalan, a full-stack developer specializing in modern
+            web and mobile applications, cloud deployment, and AI-powered tools.
+            With hands-on experience across JavaScript, React, Node.js, Spring
+            Boot, Azure, and more, I build scalable, secure systems end-to-end.
           </motion.p>
 
           <motion.div
@@ -126,7 +151,11 @@ const AboutSection = () => {
             transition={{ delay: 0.5, duration: 0.5 }}
           >
             {TAB_DATA.map(({ id, title }) => (
-              <TabButton key={id} selectTab={() => handleTabChange(id)} active={tab === id}>
+              <TabButton
+                key={id}
+                selectTab={() => handleTabChange(id)}
+                active={tab === id}
+              >
                 {title}
               </TabButton>
             ))}

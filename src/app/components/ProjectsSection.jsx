@@ -1,3 +1,4 @@
+// components/ProjectsSection.jsx
 "use client";
 import React, { useState, useRef } from "react";
 import { motion, useInView } from "framer-motion";
@@ -109,7 +110,7 @@ const projectsData = [
     description: "An E-commerce mobile application that provides a seamless shopping experience, order management and Loyalty program.",
     images: [
       "/assets/projects/jewelleryApp/0.png",
-      "/assets/projects/jewelleryApp/1.png"
+      
     ],
     tag: ["All", "Client"],
     gitUrl: null,
@@ -139,23 +140,13 @@ const publicationsData = [
   }
 ];
 
-const ProjectsSection = () => {
+export default function ProjectsSection() {
   const [tag, setTag] = useState("All");
-  const [selectedProject, setSelectedProject] = useState(null);
+  const [selected, setSelected] = useState(null);
   const ref = useRef(null);
-  const isInView = useInView(ref, { once: true });
+  const inView = useInView(ref, { once: true });
 
-  const filteredProjects = projectsData.filter(project => project.tag.includes(tag));
-
-  const containerVariants = {
-    hidden: {},
-    show: { transition: { staggerChildren: 0.15, delayChildren: 0.2 } }
-  };
-
-  const cardVariants = {
-    hidden: { opacity: 0, y: 30 },
-    show: { opacity: 1, y: 0, transition: { duration: 0.5, ease: 'easeOut' } }
-  };
+  const filtered = projectsData.filter((p) => p.tag.includes(tag));
 
   return (
     <>
@@ -170,34 +161,46 @@ const ProjectsSection = () => {
       >
         <div className="max-w-screen-xl mx-auto">
           <motion.h2
-            className="text-center text-4xl font-bold mb-6"
+            className="text-center text-4xl font-bold mb-6 neon-text"
             initial={{ opacity: 0, y: -20 }}
             whileInView={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.2, duration: 0.6 }}
+            transition={{ delay: 0.2 }}
           >
             My Projects
           </motion.h2>
 
           <motion.div
-            className="flex flex-wrap justify-center items-center gap-3 py-4"
+            className="flex flex-wrap justify-center gap-3 py-4"
             initial={{ opacity: 0, y: 10 }}
             whileInView={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.3, duration: 0.5 }}
+            transition={{ delay: 0.3 }}
           >
-            {['All', 'Web', 'Mobile', 'ML', 'Client'].map(t => (
-              <ProjectTag key={t} onClick={setTag} name={t} isSelected={tag === t} />
+            {["All", "Web", "Mobile", "ML", "Client"].map((t) => (
+              <ProjectTag
+                key={t}
+                name={t}
+                isSelected={tag === t}
+                onClick={() => setTag(t)}
+              />
             ))}
           </motion.div>
 
           <motion.ul
             ref={ref}
             className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 mt-10"
-            variants={containerVariants}
             initial="hidden"
-            animate={isInView ? 'show' : 'hidden'}
+            animate={inView ? "show" : "hidden"}
+            variants={{
+              hidden: {},
+              show: { transition: { staggerChildren: 0.15 } },
+            }}
           >
-            {filteredProjects.map(project => (
-              <motion.li key={project.id} variants={cardVariants} whileHover={{ scale: 1.02 }}>
+            {filtered.map((project) => (
+              <motion.li
+                key={project.id}
+                variants={{ hidden: { opacity: 0, y: 30 }, show: { opacity: 1, y: 0 } }}
+                whileHover={{ scale: 1.02 }}
+              >
                 <ProjectCard
                   title={project.title}
                   description={project.description}
@@ -205,20 +208,33 @@ const ProjectsSection = () => {
                   previewUrl={project.previewUrl}
                   gitUrl={project.gitUrl}
                   techStack={project.techStack}
-                  onClick={() => setSelectedProject(project)}
+                  onClick={() => setSelected(project)}
                 />
               </motion.li>
             ))}
           </motion.ul>
-
-          {selectedProject && (
-            <ProjectModal
-              images={selectedProject.images}
-              onClose={() => setSelectedProject(null)}
-            />
-          )}
         </div>
       </motion.section>
+
+      {/* Modal */}
+      {selected && (
+        <motion.div
+          initial={{ opacity: 0, scale: 0.9 }}
+          animate={{ opacity: 1, scale: 1 }}
+          exit={{ opacity: 0, scale: 0.9 }}
+          transition={{ duration: 0.3 }}
+        >
+          <ProjectModal
+            images={selected.images}
+            title={selected.title}
+            description={selected.description}
+            techStack={selected.techStack}
+            gitUrl={selected.gitUrl}
+            previewUrl={selected.previewUrl}
+            onClose={() => setSelected(null)}
+          />
+        </motion.div>
+      )}
 
       {/* Publications Section */}
       <motion.section
@@ -239,11 +255,17 @@ const ProjectsSection = () => {
             Publications
           </motion.h2>
           <ul className="space-y-8 mt-8">
-            {publicationsData.map(pub => (
+            {publicationsData.map((pub) => (
               <li key={pub.id} className="bg-[#1A1B20] p-6 rounded-lg shadow-lg">
-                <h3 className="text-2xl font-semibold text-white mb-2">{pub.title}</h3>
-                <p className="text-slate-400 mb-1"><span className="font-medium">Authors:</span> {pub.authors}</p>
-                <p className="text-slate-400 mb-1"><span className="font-medium">Published in:</span> {pub.venue}, {pub.year}</p>
+                <h3 className="text-2xl font-semibold text-white mb-2">
+                  {pub.title}
+                </h3>
+                <p className="text-slate-400 mb-1">
+                  <span className="font-medium">Authors:</span> {pub.authors}
+                </p>
+                <p className="text-slate-400 mb-1">
+                  <span className="font-medium">Published in:</span> {pub.venue}, {pub.year}
+                </p>
                 <a
                   href={pub.link}
                   target="_blank"
@@ -257,8 +279,13 @@ const ProjectsSection = () => {
           </ul>
         </div>
       </motion.section>
+
+      {/* Neon text shadow for headings */}
+      <style jsx>{`
+        .neon-text {
+          text-shadow: 0 0 4px #0ff, 0 0 8px #0ff;
+        }
+      `}</style>
     </>
   );
-};
-
-export default ProjectsSection;
+}
