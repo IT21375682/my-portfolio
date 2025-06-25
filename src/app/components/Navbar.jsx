@@ -69,13 +69,13 @@ export default function NeonNavbar() {
       />
       <div
         className={`
-          fixed top-0 left-0 z-50 h-full w-3/4 max-w-xs bg-black/90 backdrop-blur-lg
+          fixed top-0 left-0 z-50 h-full w-3/4 max-w-xl bg-black/90 bg-opacity-50 backdrop-blur-lg
           transform transition-transform duration-300
           ${open ? "translate-x-0" : "-translate-x-full"}
         `}
       >
         <div className="px-6 pt-8 pb-4 border-b border-cyan-600/30">
-          <Link href="/" onClick={() => setOpen(false)} className="neon-logo text-xl">
+          <Link href="/" onClick={() => setOpen(false)} className="neon-logo  text-cyan-400 text-xl">
             shandeep.dev
           </Link>
         </div>
@@ -143,6 +143,10 @@ export default function NeonNavbar() {
         }
         .group:hover .neon-underline {
           background-position: 0 0;
+        }
+            @media (max-width: 768px) {
+        .neon-underline {
+          width: 50%;
         }
       `}</style>
     </>

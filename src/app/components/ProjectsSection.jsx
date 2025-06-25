@@ -124,7 +124,27 @@ const projectsData = [
     images: ["/assets/projects/llama/0.png"],
     tag: ["All", "ML"],
     gitUrl: "https://github.com/IT21375682/acadamic-text-converter-llama.git",
-    previewUrl: null
+    previewUrl: null,
+     techStack: ["python", "pytorch", "huggingface"]
+  },
+   {
+    id: 8,
+    title: "EduMatrix Learning management system",
+    description: "EduMatrix is a comprehensive learning management system designed to facilitate online education and streamline academic processes.It works with React client and Spring Boot server in Rest API architecture.",
+    images: [ "/assets/projects/edumatrix/bg0.png",
+      "/assets/projects/edumatrix/1.png",
+      "/assets/projects/edumatrix/2.png",
+      "/assets/projects/edumatrix/3.png",
+      "/assets/projects/edumatrix/4.png",
+      "/assets/projects/edumatrix/5.png",
+      "/assets/projects/edumatrix/6.png",
+
+
+    ],
+    tag: ["All", "Web"],
+    gitUrl: "https://github.com/IT21375682/acadamic-text-converter-llama.git",
+    previewUrl: null,
+     techStack: ["react", "tailwindcss", "javascript", "springboot", "mongodb"]
   }
 ];
 
@@ -245,7 +265,7 @@ export default function ProjectsSection() {
         viewport={{ once: true }}
         transition={{ duration: 0.8 }}
       >
-        <div className="max-w-screen-xl mx-auto">
+        <div className="max-w-xl mx-auto">
           <motion.h2
             className="text-center text-4xl font-bold mb-6"
             initial={{ opacity: 0, y: -20 }}
