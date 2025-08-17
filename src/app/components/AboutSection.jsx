@@ -104,22 +104,27 @@ const AboutSection = () => {
       transition={{ duration: 0.8, ease: "easeOut" }}
       ref={ref}
     >
-      <div className="flex flex-col lg:flex-row items-center gap-6 xl:gap-16">
+      <div className="flex flex-col lg:flex-row items-center gap-6 xl:gap-24">
         {/* 1️⃣ Image first on mobile, left on desktop */}
-        <motion.div
-          className="w-full lg:w-1/2 flex justify-center"
-          initial={{ opacity: 0, scale: 0.95 }}
-          whileInView={{ opacity: 1, scale: 1 }}
-          transition={{ delay: 0.2, duration: 0.5 }}
-        >
-          <Image
-            src="/assets/me.png"
-            alt="My image"
-            width={300}
-            height={350}
-            className="rounded-2xl object-cover shadow-xl"
-          />
-        </motion.div>
+<motion.div
+  className="relative flex justify-center items-center w-full lg:w-1/2"
+  initial={{ opacity: 0, scale: 0.95 }}
+  whileInView={{ opacity: 1, scale: 1 }}
+  transition={{ delay: 0.2, duration: 0.5 }}
+>
+ <div className="absolute w-[440px] h-[300px] rounded-full bg-black bg-opacity-80 blur-3xl z-0"></div>
+
+  <div className="relative z-10 overflow-hidden rounded-full border border-gray-700 shadow-[0_0_30px_rgba(255,255,255,0.1)]">
+    <Image
+      src="/assets/me3.png"
+      alt="Shandeep"
+      width={300}
+      height={350}
+      className="object-cover"
+    />
+  </div>
+</motion.div>
+
 
         {/* 2️⃣ Text second on mobile, right on desktop */}
         <div className="w-full lg:w-1/2 text-left">
